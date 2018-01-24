@@ -2,7 +2,6 @@ require_relative 'directions_parser.rb'
 
 class Navigator
   include DirectionsParser
-
   attr_reader :coordinates, :orientation
 
   CARDINAL_DIRECTIONS = [:north, :east, :south, :west]
@@ -13,14 +12,25 @@ class Navigator
     @coordinates = [0,0]
   end
 
+  def navigate
+    DIRECTIONS.map do |direction|
+      if direction == 'forward'
+        move
+      else
+        turn(direction)
+      end
+    end
+    @coordinates
+  end
+
   def move
     case @orientation
     when :north
-      @coordinates[1] -= 1
+      @coordinates[1] += 1
     when :east
       @coordinates[0] += 1
     when :south
-      @coordinates[1] += 1
+      @coordinates[1] -= 1
     when :west
       @coordinates[0] -= 1
     else

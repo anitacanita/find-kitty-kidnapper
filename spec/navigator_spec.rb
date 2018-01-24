@@ -15,14 +15,14 @@ describe Navigator do
   context "Moving" do
     it "moves north" do
      navigator.move
-     expect(navigator.coordinates).to eq [0, -1]
+     expect(navigator.coordinates).to eq [0, 1]
     end
 
     it "moves south" do
       navigator.turn('right')
       navigator.turn('right')
       navigator.move
-      expect(navigator.coordinates).to eq [0, 1]
+      expect(navigator.coordinates).to eq [0, -1]
     end
 
     it "moves east" do
@@ -79,5 +79,8 @@ describe Navigator do
     end
   end
 
+  it "uses a set of directions to navigate to the right place" do
+    expect(navigator.navigate).to eq [5,2]
+  end
 
 end
